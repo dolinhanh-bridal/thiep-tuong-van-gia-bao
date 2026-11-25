@@ -788,7 +788,7 @@
         if (anh) {
           var ti = Math.max(W / anh.naturalWidth, H / anh.naturalHeight);
           var w = anh.naturalWidth * ti, h = anh.naturalHeight * ti;
-          var dy = 135, y0 = (H - h) / 2 + dy; ctx.drawImage(anh, (W - w) / 2, y0, w, h); if (y0 > 0) ctx.drawImage(anh, 0, 0, anh.naturalWidth, 2, (W - w) / 2, 0, w, y0 + 1); /* ha anh cho chu khong de mat (rieng thiep nay, 25/11/2026) */
+          var dy = 135, dx = 90, y0 = (H - h) / 2 + dy, x0 = (W - w) / 2 + dx; ctx.drawImage(anh, x0, y0, w, h); if (y0 > 0) ctx.drawImage(anh, 0, 0, anh.naturalWidth, 2, x0, 0, w, y0 + 1); if (x0 > 0) { ctx.drawImage(anh, 0, 0, 2, anh.naturalHeight, 0, y0, x0 + 1, h); ctx.drawImage(anh, 0, 0, 2, 2, 0, 0, x0 + 1, Math.max(y0, 0) + 1); } /* nguoi sang phai (25/11) */ /* ha anh cho chu khong de mat (rieng thiep nay, 25/11/2026) */
         }
         /* lop toi mo de chu noi tren moi anh */
         var gt = ctx.createLinearGradient(0, 0, 0, H * 0.42);
@@ -820,10 +820,10 @@
         var le = 78, qrKt = 330, qrY = H - 210 - qrKt;
 
         /* nhan tren QR */
-        dat('500 22px ' + SANS, '#ffffff', 0.95);
+        dat('500 18px ' + SANS, '#ffffff', 0.95);
         ctx.textAlign = 'left';
-        ctx.fillText('QUÉT MÃ ĐỂ XEM', le, qrY - 44);
-        ctx.fillText('THIỆP CƯỚI ONLINE', le, qrY - 18);
+        ctx.fillText('QUÉT MÃ ĐỂ XEM', le, qrY - 40);
+        ctx.fillText('THIỆP CƯỚI ONLINE', le, qrY - 16);
 
         ctx.globalAlpha = 1; ctx.shadowBlur = 0;
         if (qr) {
@@ -831,22 +831,24 @@
              khung trang bao ngoai nua. Anh QR tu API da co san vung trang
              margin=4 module — do la vien toi thieu de may quet nhan duoc.
              Bo not vung do la ma khong quet duoc. */
+          ctx.globalAlpha = 0.8; /* ma nhat hon (25/11) */
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(le, qrY, qrKt, qrKt);
           ctx.drawImage(qr, le, qrY, qrKt, qrKt);
+          ctx.globalAlpha = 1;
         }
 
         /* loi cam on ben phai QR */
         var xp = le + qrKt + 54;
-        dat('500 23px ' + SANS, '#ffffff', 0.95);
-        ctx.fillText('THANK YOU FOR BEING A PART', xp, qrY + 104);
-        ctx.fillText('OF OUR SPECIAL DAY!', xp, qrY + 138);
+        dat('500 18px ' + SANS, '#ffffff', 0.95);
+        ctx.fillText('THANK YOU FOR BEING A PART', xp, qrY + 120);
+        ctx.fillText('OF OUR SPECIAL DAY!', xp, qrY + 146);
 
-        dat('italic 30px ' + SERIF, '#ffffff', 0.95);
-        ctx.fillText('with love,', xp, qrY + 200);
+        dat('italic 24px ' + SERIF, '#ffffff', 0.95);
+        ctx.fillText('with love,', xp, qrY + 198);
 
-        dat('italic 52px ' + VIET, VANG, 1);
-        ctx.fillText(tenCap, xp, qrY + 262);
+        dat('italic 40px ' + VIET, VANG, 1);
+        ctx.fillText(tenCap, xp, qrY + 248);
 
         /* duong ke vang + credit */
         ctx.globalAlpha = 0.22; ctx.strokeStyle = VANG; ctx.lineWidth = 1; ctx.shadowBlur = 0;
