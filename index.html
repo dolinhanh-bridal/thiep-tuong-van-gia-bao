@@ -772,6 +772,7 @@
         var fAmp = ctx.measureText('&').width;
         var khe = cao * 0.42;
         var tong = fA + khe + fAmp + khe + fB;
+        if (tong > W - 120) return veTen(y, Math.floor(cao * (W - 120) / tong)); /* ten dai tu thu nho, khong bi cat (25/11/2026) */
         var x = (W - tong) / 2;
         dat(cao + 'px ' + SERIF, '#ffffff');
         ctx.fillText(p[0], x, y); x += fA + khe;
@@ -787,7 +788,7 @@
         if (anh) {
           var ti = Math.max(W / anh.naturalWidth, H / anh.naturalHeight);
           var w = anh.naturalWidth * ti, h = anh.naturalHeight * ti;
-          ctx.drawImage(anh, (W - w) / 2, (H - h) / 2, w, h);
+          var dy = 135, y0 = (H - h) / 2 + dy; ctx.drawImage(anh, (W - w) / 2, y0, w, h); if (y0 > 0) ctx.drawImage(anh, 0, 0, anh.naturalWidth, 2, (W - w) / 2, 0, w, y0 + 1); /* ha anh cho chu khong de mat (rieng thiep nay, 25/11/2026) */
         }
         /* lop toi mo de chu noi tren moi anh */
         var gt = ctx.createLinearGradient(0, 0, 0, H * 0.42);
